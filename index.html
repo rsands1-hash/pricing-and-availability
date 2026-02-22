@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Photography – Pricing & Availability</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: transparent;
+            color: #2d3748;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 100%;
+            background: transparent;
+            padding: 0;
+        }
+
+        #pricingForm {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #6b5876;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .cute-label {
+            color: #d44aad;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1.5px solid #e8e0ec;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fff;
+            line-height: 1.4;
+            transition: all 0.25s ease;
+            -webkit-appearance: none;
+            appearance: none;
+            color: #3a2d40;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #bfaec5;
+            font-weight: 300;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            height: 52px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+            border-radius: 20px;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a090a8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 14px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 38px;
+            color: #3a2d40;
+        }
+
+        select option {
+            color: #3a2d40;
+        }
+
+        /* empty/placeholder selects get lighter color */
+        select:invalid,
+        select option[value=""] {
+            color: #bfaec5;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #d0c0d6;
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #c09acc;
+            background: #fff;
+        }
+
+        /* ── SUBMIT BUTTON ── */
+        .submit-btn {
+            position: relative;
+            width: auto;
+            margin: 0 20px;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 999px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            line-height: 1.2;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 97, 213, 0.35);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        /* shine layer */
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.45),
+                transparent
+            );
+            transform: skewX(-20deg);
+            transition: none;
+            pointer-events: none;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(255, 97, 213, 0.5);
+            border-color: #fff;
+        }
+
+        .submit-btn:hover::before {
+            animation: btn-shine 0.6s ease-out forwards;
+        }
+
+        @keyframes btn-shine {
+            0%   { right: 120%; }
+            100% { right: -60%; }
+        }
+
+        .submit-btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 8px rgba(255, 97, 213, 0.3);
+        }
+
+        .btn-wrapper {
+            text-align: center;
+        }
+
+        /* ── RESULTS PANEL ── */
+        .results-container {
+            display: none;
+            padding: 40px 10px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in;
+            min-height: 300px;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .status-icon {
+            font-size: 64px;
+            animation: bounceIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes bounceIn {
+            0%   { transform: scale(0); }
+            50%  { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .results-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2d3748;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-btn {
+                font-size: 1rem;
+                padding: 16px 20px;
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="pricingForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="bride-name">Bride's Name *</label>
+                <input type="text" id="bride-name" name="brideName" required>
+            </div>
+            <div class="form-group">
+                <label for="groom-name">Groom's Name *</label>
+                <input type="text" id="groom-name" name="groomName" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="wedding-date" class="cute-label">I hope I'm free on your big day 🤗</label>
+                <input type="date" id="wedding-date" name="weddingDate" required>
+            </div>
+            <div class="form-group">
+                <label for="venue">Wedding Venue/Location</label>
+                <input type="text" id="venue" name="venue" placeholder="Where will your wedding take place?">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="guest-count">Estimated Guest Count</label>
+                <select id="guest-count" name="guestCount">
+                    <option value="">Select guest count</option>
+                    <option value="under-50">Under 50</option>
+                    <option value="50-100">50-100</option>
+                    <option value="100-150">100-150</option>
+                    <option value="150-200">150-200</option>
+                    <option value="200-plus">200+</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="budget-range">Photography Budget Range</label>
+                <select id="budget-range" name="budgetRange">
+                    <option value="">Select budget range</option>
+                    <option value="2000-3000">$2,000 - $3,000</option>
+                    <option value="3000-4000">$3,000 - $4,000</option>
+                    <option value="4000-5000">$4,000 - $5,000</option>
+                    <option value="5000-7000">$5,000 - $7,000</option>
+                    <option value="7000-plus">$7,000+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="wedding-vision">Tell me about your wedding vision &amp; any questions you have</label>
+            <textarea id="wedding-vision" name="weddingVision" placeholder="Share details about your wedding style, any specific shots you're dreaming of, or questions about my packages..."></textarea>
+        </div>
+
+        <div class="form-row bottom-row">
+            <div class="form-group">
+                <label for="referral-source">How did you hear about me?</label>
+                <select id="referral-source" name="referralSource">
+                    <option value="">Select source</option>
+                    <option value="google">Google Search</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="referral">Referral from Friend/Family</option>
+                    <option value="vendor-referral">Vendor Referral</option>
+                    <option value="wedding-website">Wedding Website/Blog</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-end;justify-content:center;">
+                <button type="submit" class="submit-btn" style="margin:0;">
+                    Check Availability &amp; See Pricing
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="results-container" id="resultsContainer">
+        <div class="emoji-row"></div>
+        <div class="results-message" id="resultsMessage"></div>
+    </div>
+</div>
+
+<script>
+    const bookedDates = [
+        "2025-02-16","2025-02-26","2025-03-15","2025-05-30","2025-06-07","2025-06-13","2025-07-11","2025-07-26","2025-08-15","2025-08-19","2025-09-20","2025-09-24","2025-10-04","2025-10-17","2025-11-13","2025-11-15","2025-12-05","2025-12-13",
+        "2026-01-10","2026-04-17","2026-04-19","2026-05-30","2026-06-25","2026-08-29","2026-08-30","2026-10-29","2026-09-18","2026-04-24","2026-05-31","2026-06-05","2026-10-09","2026-09-05","2026-09-13","2026-11-28","2026-12-03","2026-07-12","2026-10-03","2026-12-27",
+        "2027-01-14","2027-01-15","2027-06-18","2027-01-06","2027-01-10","2027-11-12","2027-03-20","2027-02-05","2027-03-19","2027-05-13"
+    ];
+
+    document.getElementById('pricingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const weddingDate = document.getElementById('wedding-date').value;
+        const isBooked = bookedDates.includes(weddingDate);
+
+        const formData = new FormData(this);
+        formData.set('availability', isBooked ? 'booked' : 'available');
+
+        const availabilityMessage = isBooked
+            ? '\u274C BOOKED - This date is already booked'
+            : '\u2705 AVAILABLE - This date is free!';
+        formData.set('availabilityStatus', availabilityMessage);
+
+        const formObject = {};
+        formData.forEach((value, key) => { formObject[key] = value; });
+        sessionStorage.setItem('weddingInquiry', JSON.stringify(formObject));
+
+        try {
+            await fetch('https://script.google.com/macros/s/AKfycby-T8U5MidCxZlovztLvpIKv-I_MdS3X0zvsXoTQPwpI-REe8DLbbLtqz3v9Vj9HKGX/exec', {
+                method: 'POST',
+                body: formData
+            });
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+
+        showResults(isBooked);
+    });
+
+    function showResults(isBooked) {
+        document.getElementById('pricingForm').style.display = 'none';
+
+        const resultsContainer = document.getElementById('resultsContainer');
+        const emojiRow = resultsContainer.querySelector('.emoji-row');
+        const resultsMessage = document.getElementById('resultsMessage');
+
+        if (isBooked) {
+            emojiRow.innerHTML = '<div class="status-icon">😔</div>';
+            resultsMessage.className = 'results-message booked';
+            resultsMessage.innerHTML = "Thank you for reaching out! Unfortunately, I'm already booked on your wedding date. While I'm so bummed I can't be there for your big day, I'd love to be part of your journey in other ways! I'm available for engagement sessions, bridal showers, and rehearsal dinners. Check your email for more details and let's see how we can work together!";
+        } else {
+            emojiRow.innerHTML = '<div class="status-icon">🎊</div>';
+            resultsMessage.className = 'results-message available';
+            resultsMessage.innerHTML = "I have wonderful news — I'm available on your wedding date! 💕 Please check your email for my complete pricing guide and next steps. I can't wait to hear more about your special day!";
+        }
+
+        resultsContainer.classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
