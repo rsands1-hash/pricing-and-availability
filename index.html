@@ -297,7 +297,7 @@
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" style="grid-template-columns:1fr 1fr 1fr;">
             <div class="form-group">
                 <label for="guest-count">Estimated Guest Count</label>
                 <select id="guest-count" name="guestCount">
@@ -320,14 +320,6 @@
                     <option value="7000-plus">$7,000+</option>
                 </select>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label for="wedding-vision">Tell me about your wedding vision &amp; any questions you have</label>
-            <textarea id="wedding-vision" name="weddingVision" placeholder="Share details about your wedding style, any specific shots you're dreaming of, or questions about my packages..."></textarea>
-        </div>
-
-        <div class="form-row bottom-row">
             <div class="form-group">
                 <label for="referral-source">How did you hear about me?</label>
                 <select id="referral-source" name="referralSource">
@@ -341,11 +333,17 @@
                     <option value="other">Other</option>
                 </select>
             </div>
-            <div class="form-group" style="display:flex;align-items:flex-end;justify-content:center;">
-                <button type="submit" class="submit-btn" style="margin:0;">
-                    Check Availability &amp; See Pricing
-                </button>
-            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="wedding-vision">Tell me about your wedding vision &amp; any questions you have</label>
+            <textarea id="wedding-vision" name="weddingVision" placeholder="Share details about your wedding style, any specific shots you're dreaming of, or questions about my packages..."></textarea>
+        </div>
+
+        <div class="btn-wrapper">
+            <button type="submit" class="submit-btn">
+                Check Availability &amp; See Pricing
+            </button>
         </div>
     </form>
 
