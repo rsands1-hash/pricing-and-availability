@@ -383,6 +383,10 @@
             margin: 0 auto;
         }
 
+        .btn-text-mobile {
+            display: none;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 600px) {
             .form-row,
@@ -409,9 +413,18 @@
                 padding-top: 0;
             }
 
+            .btn-text-desktop {
+                display: none;
+            }
+
+            .btn-text-mobile {
+                display: inline;
+            }
+
             .submit-btn {
-                font-size: 1rem;
+                font-size: clamp(0.75rem, 3.5vw, 1rem);
                 padding: 16px 20px;
+                white-space: nowrap;
             }
         }
     </style>
@@ -508,7 +521,8 @@
             </div>
             <div class="btn-wrapper">
                 <button type="submit" class="submit-btn">
-                    Unlock Pricing + Check My Date
+                    <span class="btn-text-desktop">Unlock Pricing + Check My Date</span>
+                    <span class="btn-text-mobile">Unlock Pricing / Check Date</span>
                 </button>
             </div>
         </div>
