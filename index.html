@@ -34,8 +34,8 @@
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-bottom: 20px;
+            gap: 24px;
+            margin-bottom: 12px;
         }
 
         .form-row.three-col {
@@ -43,7 +43,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .form-row .form-group {
@@ -57,6 +57,35 @@
             font-weight: 600;
             font-size: 0.9rem;
             letter-spacing: 0.02em;
+        }
+
+        label.sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .date-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .date-label {
+            margin-bottom: 0;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .date-group input[type="date"] {
+            flex: 1;
+            min-width: 0;
         }
 
         .cute-label {
@@ -84,8 +113,8 @@
 
         input::placeholder,
         textarea::placeholder {
-            color: #bfaec5;
-            font-weight: 300;
+            color: #9b8a9f;
+            font-weight: 400;
         }
 
         input[type="text"],
@@ -271,42 +300,42 @@
     <form id="pricingForm">
         <div class="form-row">
             <div class="form-group">
-                <label for="bride-name">Bride's Name *</label>
-                <input type="text" id="bride-name" name="brideName" required>
+                <label for="bride-name" class="sr-only">Bride's Name</label>
+                <input type="text" id="bride-name" name="brideName" placeholder="Bride's Name *" required>
             </div>
             <div class="form-group">
-                <label for="groom-name">Groom's Name *</label>
-                <input type="text" id="groom-name" name="groomName" required>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required>
+                <label for="groom-name" class="sr-only">Groom's Name</label>
+                <input type="text" id="groom-name" name="groomName" placeholder="Groom's Name *" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
-                <label for="wedding-date">Check my availability</label>
+                <label for="email" class="sr-only">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Email Address *" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="sr-only">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number *" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group date-group">
+                <label for="wedding-date" class="date-label">Check my availability</label>
                 <input type="date" id="wedding-date" name="weddingDate" required>
             </div>
             <div class="form-group">
-                <label for="venue">Wedding Venue</label>
-                <input type="text" id="venue" name="venue" placeholder="Where will your wedding take place?">
+                <label for="venue" class="sr-only">Wedding Venue</label>
+                <input type="text" id="venue" name="venue" placeholder="Wedding Venue">
             </div>
         </div>
 
         <div class="form-row three-col">
             <div class="form-group">
-                <label for="guest-count">Guest Count</label>
+                <label for="guest-count" class="sr-only">Guest Count</label>
                 <select id="guest-count" name="guestCount">
-                    <option value="">Select guest count</option>
+                    <option value="">Guest Count</option>
                     <option value="under-50">Under 50</option>
                     <option value="50-100">50-100</option>
                     <option value="100-150">100-150</option>
@@ -315,9 +344,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="budget-range">Budget Range</label>
+                <label for="budget-range" class="sr-only">Budget Range</label>
                 <select id="budget-range" name="budgetRange">
-                    <option value="">Select budget range</option>
+                    <option value="">Budget Range</option>
                     <option value="2000-3000">$2,000 - $3,000</option>
                     <option value="3000-4000">$3,000 - $4,000</option>
                     <option value="4000-5000">$4,000 - $5,000</option>
@@ -326,9 +355,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="referral-source">How did you find me?</label>
+                <label for="referral-source" class="sr-only">How did you find me?</label>
                 <select id="referral-source" name="referralSource">
-                    <option value="">Select source</option>
+                    <option value="">How did you find me?</option>
                     <option value="google">Google Search</option>
                     <option value="instagram">Instagram</option>
                     <option value="facebook">Facebook</option>
@@ -341,8 +370,8 @@
         </div>
 
         <div class="form-group">
-            <label for="wedding-vision">Tell me about your special day</label>
-            <textarea id="wedding-vision" name="weddingVision" placeholder="Share details about your wedding style, any specific shots you're dreaming of, or questions about my packages..."></textarea>
+            <label for="wedding-vision" class="sr-only">Tell me about your special day</label>
+            <textarea id="wedding-vision" name="weddingVision" placeholder="Tell me about your special day — your wedding style, specific shots you're dreaming of, or questions about my packages..."></textarea>
         </div>
 
         <div class="btn-wrapper">
