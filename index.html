@@ -71,22 +71,6 @@
             border: 0;
         }
 
-        .date-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .date-label {
-            margin-bottom: 0;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .date-group input[type="date"] {
-            flex: 1;
-            min-width: 0;
-        }
 
         .cute-label {
             color: #d44aad;
@@ -165,6 +149,125 @@
             background: #fff;
         }
 
+        /* ── BOTTOM ROW: CALENDAR + BUTTON ── */
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+
+        /* ── CALENDAR WIDGET ── */
+        .calendar-wrapper {
+            width: 100%;
+        }
+
+        .calendar-header-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #6b5876;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .calendar {
+            border: 2.5px solid #e8e0ec;
+            border-radius: 16px;
+            background: #fff;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
+        }
+
+        .calendar-header button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            line-height: 1;
+            transition: background 0.15s;
+        }
+
+        .calendar-header button:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .calendar-month-year {
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.12);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 6px;
+            gap: 2px;
+        }
+
+        .calendar-dow {
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #9b8a9f;
+            padding: 4px 0;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 6px 0;
+            font-size: 0.82rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #3a2d40;
+        }
+
+        .calendar-day:hover {
+            background: #f5edf8;
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        .calendar-day.empty:hover {
+            background: none;
+        }
+
+        .calendar-day.today {
+            font-weight: 700;
+            border: 1.5px solid #e8e0ec;
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 100%);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .calendar-day.selected:hover {
+            background: linear-gradient(135deg, #e855c0 0%, #f080d0 100%);
+        }
+
+        .calendar-day.other-month {
+            color: #d4c8d8;
+        }
+
         /* ── SUBMIT BUTTON ── */
         .submit-btn {
             position: relative;
@@ -231,7 +334,10 @@
         }
 
         .btn-wrapper {
-            text-align: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 4px;
         }
 
         /* ── RESULTS PANEL ── */
@@ -286,6 +392,14 @@
                 grid-template-columns: 1fr;
             }
 
+            .bottom-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-wrapper {
+                justify-content: center;
+            }
+
             .submit-btn {
                 font-size: 1rem;
                 padding: 16px 20px;
@@ -321,17 +435,10 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group date-group">
-                <label for="wedding-date" class="date-label">Check my availability</label>
-                <input type="date" id="wedding-date" name="weddingDate" required>
-            </div>
             <div class="form-group">
                 <label for="venue" class="sr-only">Wedding Venue</label>
                 <input type="text" id="venue" name="venue" placeholder="Wedding Venue">
             </div>
-        </div>
-
-        <div class="form-row three-col">
             <div class="form-group">
                 <label for="guest-count" class="sr-only">Guest Count</label>
                 <select id="guest-count" name="guestCount">
@@ -343,6 +450,9 @@
                     <option value="200-plus">200+</option>
                 </select>
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="form-group">
                 <label for="budget-range" class="sr-only">Budget Range</label>
                 <select id="budget-range" name="budgetRange">
@@ -374,10 +484,25 @@
             <textarea id="wedding-vision" name="weddingVision" placeholder="Tell me about your special day — your wedding style, specific shots you're dreaming of, or questions about my packages..."></textarea>
         </div>
 
-        <div class="btn-wrapper">
-            <button type="submit" class="submit-btn">
-                Unlock Pricing + Check My Date
-            </button>
+        <input type="hidden" id="wedding-date" name="weddingDate" required>
+
+        <div class="bottom-row">
+            <div class="calendar-wrapper">
+                <label class="calendar-header-label">Check my availability</label>
+                <div class="calendar" id="calendar">
+                    <div class="calendar-header">
+                        <button type="button" id="cal-prev">&lsaquo;</button>
+                        <span class="calendar-month-year" id="cal-month-year"></span>
+                        <button type="button" id="cal-next">&rsaquo;</button>
+                    </div>
+                    <div class="calendar-grid" id="cal-grid"></div>
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <button type="submit" class="submit-btn">
+                    Unlock Pricing<br>+ Check My Date
+                </button>
+            </div>
         </div>
     </form>
 
@@ -394,10 +519,88 @@
         "2027-01-14","2027-01-15","2027-06-18","2027-01-06","2027-01-10","2027-11-12","2027-03-20","2027-02-05","2027-03-19","2027-05-13"
     ];
 
+    /* ── CALENDAR WIDGET ── */
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DAYS = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+    let calDate = new Date();
+    let selectedDate = null;
+
+    function renderCalendar() {
+        const year = calDate.getFullYear();
+        const month = calDate.getMonth();
+        const today = new Date();
+
+        document.getElementById('cal-month-year').textContent = MONTHS[month] + ' ' + year;
+
+        const grid = document.getElementById('cal-grid');
+        grid.innerHTML = '';
+
+        // Day-of-week headers
+        DAYS.forEach(d => {
+            const el = document.createElement('div');
+            el.className = 'calendar-dow';
+            el.textContent = d;
+            grid.appendChild(el);
+        });
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+            const el = document.createElement('div');
+            el.className = 'calendar-day empty';
+            grid.appendChild(el);
+        }
+
+        // Day cells
+        for (let d = 1; d <= daysInMonth; d++) {
+            const el = document.createElement('div');
+            el.className = 'calendar-day';
+            el.textContent = d;
+
+            const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+            if (isToday) el.classList.add('today');
+
+            if (selectedDate && d === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
+                el.classList.add('selected');
+            }
+
+            el.addEventListener('click', () => {
+                selectedDate = new Date(year, month, d);
+                // Write YYYY-MM-DD into hidden input
+                const mm = String(month + 1).padStart(2, '0');
+                const dd = String(d).padStart(2, '0');
+                document.getElementById('wedding-date').value = year + '-' + mm + '-' + dd;
+                renderCalendar();
+            });
+
+            grid.appendChild(el);
+        }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+        calDate.setMonth(calDate.getMonth() - 1);
+        renderCalendar();
+    });
+
+    document.getElementById('cal-next').addEventListener('click', () => {
+        calDate.setMonth(calDate.getMonth() + 1);
+        renderCalendar();
+    });
+
+    renderCalendar();
+
+    /* ── FORM SUBMISSION ── */
     document.getElementById('pricingForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
         const weddingDate = document.getElementById('wedding-date').value;
+        if (!weddingDate) {
+            alert('Please select a date on the calendar.');
+            return;
+        }
         const isBooked = bookedDates.includes(weddingDate);
 
         const formData = new FormData(this);
