@@ -152,9 +152,9 @@
         /* ── BOTTOM ROW: CALENDAR + BUTTON ── */
         .bottom-row {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
-            align-items: end;
+            align-items: start;
             margin-bottom: 12px;
         }
 
@@ -271,8 +271,8 @@
         /* ── SUBMIT BUTTON ── */
         .submit-btn {
             position: relative;
-            width: auto;
-            margin: 0 20px;
+            width: 100%;
+            margin: 0;
             padding: 14px 20px;
             background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
             color: white;
@@ -334,10 +334,7 @@
         }
 
         .btn-wrapper {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 4px;
+            padding-top: calc(0.9rem * 1.4 + 8px);
         }
 
         /* ── RESULTS PANEL ── */
@@ -397,13 +394,12 @@
             }
 
             .btn-wrapper {
-                justify-content: center;
+                padding-top: 0;
             }
 
             .submit-btn {
                 font-size: 1rem;
                 padding: 16px 20px;
-                margin: 0 20px;
             }
         }
     </style>
@@ -500,7 +496,7 @@
             </div>
             <div class="btn-wrapper">
                 <button type="submit" class="submit-btn">
-                    Unlock Pricing<br>+ Check My Date
+                    Unlock Pricing + Check My Date
                 </button>
             </div>
         </div>
