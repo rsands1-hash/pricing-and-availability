@@ -38,6 +38,10 @@
             margin-bottom: 20px;
         }
 
+        .form-row.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -248,7 +252,8 @@
 
         /* ── RESPONSIVE ── */
         @media (max-width: 600px) {
-            .form-row {
+            .form-row,
+            .form-row.three-col {
                 grid-template-columns: 1fr;
             }
 
@@ -288,7 +293,7 @@
 
         <div class="form-row">
             <div class="form-group">
-                <label for="wedding-date" class="cute-label">I hope I'm free on your big day 🤗</label>
+                <label for="wedding-date" class="cute-label">Check my availability 🤞🏻</label>
                 <input type="date" id="wedding-date" name="weddingDate" required>
             </div>
             <div class="form-group">
@@ -297,7 +302,7 @@
             </div>
         </div>
 
-        <div class="form-row" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="form-row three-col">
             <div class="form-group">
                 <label for="guest-count">Estimated Guest Count</label>
                 <select id="guest-count" name="guestCount">
@@ -342,7 +347,7 @@
 
         <div class="btn-wrapper">
             <button type="submit" class="submit-btn">
-                Check Availability &amp; See Pricing
+                Unlock Pricing + Check My Date
             </button>
         </div>
     </form>
