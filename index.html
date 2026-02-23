@@ -170,6 +170,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             letter-spacing: 0.02em;
+            text-align: center;
         }
 
         .calendar {
@@ -387,10 +388,21 @@
             .form-row,
             .form-row.three-col {
                 grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 0;
             }
 
             .bottom-row {
                 grid-template-columns: 1fr;
+                gap: 12px;
             }
 
             .btn-wrapper {
